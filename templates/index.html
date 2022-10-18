@@ -1,0 +1,518 @@
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Join Remote Support Session &#x7c;</title>
+
+    <style>
+      @charset "UTF-8";
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f3f3f3;
+      }
+      body,
+      div,
+      span,
+      p,
+      button,
+      li,
+      section,
+      input,
+      textarea {
+        font-family: sans-serif;
+        letter-spacing: 0.2px;
+      }
+      .outer-container {
+        width: 560px;
+        margin: 80px auto 30px;
+      }
+
+      .host-login {
+        padding: 10px 20px;
+        float: right;
+        text-decoration: none;
+        border: 1px solid #52a6dd;
+        background-color: #fff;
+        border-radius: 25px;
+        position: fixed;
+        top: 30px;
+        right: 20px;
+        color: #52a6dd;
+        vertical-align: middle;
+      }
+
+      .host-login img {
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        margin-right: 2px;
+      }
+
+      .join-header {
+        width: 100%;
+        float: left;
+      }
+      .assist-logo,
+      .logo {
+        height: 30px;
+        float: left;
+        margin: 0px 0 20px;
+      }
+
+      .assist-logo {
+        background-image: url("../images/assist-new.png");
+        background-repeat: no-repeat;
+        background-size: 90%;
+      }
+
+      .report-link {
+        color: #1f8dd6;
+        text-decoration: none;
+      }
+      .join-container {
+        float: left;
+        border: solid 1px #ddd;
+        padding: 30px 40px;
+        background-color: #fff;
+        box-shadow: 0 0 25px #ddd;
+        position: relative;
+        margin-bottom: 55px;
+      }
+      .join-desc {
+        font-size: 15px;
+        text-align: left;
+        margin: 0 0 20px;
+        line-height: 22px;
+        float: left;
+      }
+
+      .report-abuse-container {
+        line-height: 22px;
+        font-size: 15px;
+        float: left;
+        background: #fcf5dd;
+        margin: 0px 0px 10px;
+        padding: 15px 20px 15px 40px;
+      }
+
+      .report-abuse-container > li {
+        margin-bottom: 10px;
+      }
+
+      .report-abuse-container > li:last-child {
+        margin-bottom: 0;
+      }
+
+      .join-field {
+        float: left;
+        margin: 25px 0;
+        width: 100%;
+        position: relative;
+      }
+      .labelspan {
+        position: absolute;
+        pointer-events: none;
+        /* font-size: 20px;
+  color: #c3c3c3;
+  left: 5px;
+  top: 12px; */
+        top: -18px;
+        left: 0px;
+        font-size: 13px;
+        color: #757070;
+        transition: 0.2s ease all;
+      }
+      .join-txt-box,
+      .emailbox {
+        border: none;
+        border-bottom: solid 1px #ddd;
+        padding: 6px 0;
+        width: 100%;
+        font-size: 18px;
+        z-index: 1;
+        letter-spacing: 5px;
+        outline: none;
+      }
+      .name-email {
+        letter-spacing: 1px;
+      }
+      ::placeholder {
+        letter-spacing: 0;
+        color: #bbb !important;
+      }
+
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        letter-spacing: 0;
+        color: #bbb !important;
+        opacity: 0.5;
+      }
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        letter-spacing: 0;
+        color: #bbb !important;
+      }
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        letter-spacing: 0;
+        color: #bbb !important;
+      }
+      :-moz-placeholder {
+        /* Firefox 18- */
+        letter-spacing: 0;
+        color: #bbb !important;
+      }
+      .join-txt-box:focus ~ .labelspan,
+      .join-txt-box:not(:focus):valid ~ .labelspan {
+        top: -18px;
+        left: 0px;
+        font-size: 13px;
+        color: #757070;
+      }
+      .join-txt-box:focus {
+        border-bottom: solid 1px #1e8dd5;
+      }
+      .join-btn {
+        background-color: #1e8dd5;
+        color: #fff;
+        border: none;
+        padding: 16px 20px;
+        width: 100%;
+        font-size: 16px;
+        margin-top: 10px;
+        outline: none;
+      }
+      .join-btn:hover {
+        background-color: #137bbe;
+        cursor: pointer;
+      }
+      .disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .cust-plugin {
+        padding: 20px 0 25px;
+        text-align: center;
+        width: 100%;
+        float: left;
+        font-size: 14px;
+      }
+      .cust-plugin-txt {
+        font-size: 14px;
+        text-align: center;
+        margin: 10px 0 20px;
+      }
+      .cust-plugin p a {
+        color: #1e8dd5;
+        margin: 0 20px;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: 400;
+        line-height: 28px;
+      }
+
+      .copyRightsDiv {
+        width: 100%;
+        float: left;
+        padding: 0px 20px;
+        box-sizing: border-box;
+        bottom: 0;
+        left: 0;
+        background: #f6f6f6;
+      }
+
+      #copy-right {
+        font-size: 11px;
+        color: grey;
+        line-height: 46px;
+      }
+
+      .copyright {
+        text-align: center;
+        width: 100%;
+        font-size: 12px;
+        color: #999;
+        padding: 20px 0;
+        float: left;
+        border-top: solid 1px #ccc;
+      }
+
+      .join-header-txt {
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        margin: 0 0 20px;
+      }
+
+      .join-header-left-win {
+        font-size: 15px;
+        line-height: 22px;
+        display: inline-block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      .join-header-left {
+        font-size: 18px;
+        line-height: 26px;
+      }
+
+      .no-margin {
+        margin: 0 !important;
+        text-decoration: none !important;
+      }
+      .success-span {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        background-color: #555;
+        padding: 10px 20px;
+        border-radius: 20px;
+        z-index: 99;
+        top: -20px;
+        font-size: 13px;
+      }
+
+      .error-txt {
+        color: red;
+        font-size: 12px;
+        line-height: 24px;
+        display: none;
+      }
+
+      .language-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .select-css {
+        display: block;
+        font-size: 14px;
+        font-family: sans-serif;
+        color: #444;
+        line-height: 1.3;
+        padding: 0.6em 2em 0.5em 2.4em;
+        width: 100%;
+        max-width: 100%; /* useful when width is set to anything other than 100% */
+        box-sizing: border-box;
+        margin: 0;
+        border: 0px solid #aaa;
+        box-shadow: 0 2px 5px #00000022;
+        border-radius: 20px;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        /* note: bg image below uses 2 urls. The first is an svg data uri for the arrow icon, and the second is the gradient. 
+        for the icon, if you want to change the color, be sure to use `%23` instead of `#`, since it's a url. You can also swap in a different svg icon or an external image reference
+        
+    */
+
+        background-image: url("../images/general.png"),
+          url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG8AAAA5CAYAAAA4EnWKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTg4NTRDMDg1RTYwMTFFNzkwMDJENzU0QjdGRTQ4MTgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTg4NTRDMDk1RTYwMTFFNzkwMDJENzU0QjdGRTQ4MTgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5ODg1NEMwNjVFNjAxMUU3OTAwMkQ3NTRCN0ZFNDgxOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5ODg1NEMwNzVFNjAxMUU3OTAwMkQ3NTRCN0ZFNDgxOCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv2CUxwAAAJrSURBVHja7N3LSgJhFAdwnWXOok3UUqldED5CbkRoJRRtChwKurlIDHNngqtWPoJvEW2qN7AHKHBZtBG0tXGcJozyOt/lnDPnDwM6M5vv+zE4lz9jvNfrL19Wao8vr510TEIiG+vJ5+ZtPeO4bqILH2CFTAsdOHBzYIUA0oOD7/HBYPCzsd//XD4+v2q/vX8kZapww0Gc0R1gQ6NWybvuUlemCzfcHzx/x9T3jgKIGe5fPAGkATcWTwDxw03EE0DccFPxBBAv3Ex4AWCjdp2XqcUDNzMeJL21+VQtX3gyxTjg5sKD5LKZlgDigJsbTwDxwC2EJ4A44BbGE0D7cKHwBNAuXGi8AHA3v9MUErNwSvAgxVOvlMtut4TGHJwyPEi1XPQE0BycUjwBNAunHE8AzcFpwRNAM3Da8ARQP5xWvOFZ6IlXimIjbW11paMbTjteFCuF8NzTL3EltD//dPQPJjqAAOePNWVkrI6ZQfEHNA1nDI87oA04o3hcAW3BQX7V3U2FS63eJpzxI2/0CKReq7cNZw3Pv4ilWynEAGcVjyogFjjreNQAMcGhwKMCiA0ODR52QIxwqPACQGy1eqxw6PAgmGr1mOFQ4kEwVAqxw6HFsw1IAQ41ni1AKnDo8UwDUoIjgWcKkBocGbwAsHCwVxc4gniQwuH+jepGGlU4cngQlZVCynAk8VQBUocjixcWkAMcabwwgHD/lDocebxFAOGSA+6fxhjESgFJR6DQNO1VywAHlxwxJnG4DGRapZAbHCu8SZ1QjnCs8MYBcoUbBn7zuC3wdwNHZ+X23f1DgeP4goXNCUsU8yXAAO7zA1tq1cmoAAAAAElFTkSuQmCC);
+        background-repeat: no-repeat;
+        /* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
+        background-position: top 9px left 10px, top 14px right 12px;
+        /* icon size, then gradient */
+        background-size: 16px, 10px;
+        cursor: pointer;
+      }
+
+      /* Hide arrow icon in IE browsers */
+      .select-css::-ms-expand {
+        display: none;
+      }
+      /* Hover style */
+      .select-css:hover {
+        border-color: #888;
+      }
+      /* Focus style */
+      .select-css:focus {
+        /* border-color: #aaa; */
+        /* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+        /*  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring; */
+        color: #222;
+        outline: none;
+      }
+
+      /* Set options to normal weight */
+      .select-css option {
+        font-weight: normal;
+      }
+
+      /* Support for rtl text, explicit support for Arabic and Hebrew */
+      *[dir="rtl"] .select-css,
+      :root:lang(ar) .select-css,
+      :root:lang(iw) .select-css {
+        background-position: left 0.7em top 50%, 0 0;
+        padding: 0.6em 0.8em 0.5em 1.4em;
+      }
+
+      /* Disabled styles */
+      .select-css:disabled,
+      .select-css[aria-disabled="true"] {
+        color: grey;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22graytext%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"),
+          linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+      }
+
+      .select-css:disabled:hover,
+      .select-css[aria-disabled="true"] {
+        border-color: #aaa;
+      }
+      .error-message {
+        text-align: left;
+        margin-left: 0px;
+        color: #f00;
+        font-size: 13px;
+        padding-top: 5px;
+      }
+    </style>
+    <!-- Page Sense JS -->
+    <script>
+      function submitCont() {
+        var emailID = document.getElementById("emailID").value;
+        emailID = emailID.trim();
+
+        var key = extractNumber(document.getElementById("sessionKey").value);
+        document.getElementById("sessionKey").value = key;
+        if (emailID == "") {
+          document.getElementById("email_error").style.display = " block";
+          document.getElementById("emailID").focus();
+        }
+        document.getElementById("src").value = "submit"; //no i18n
+        var e = document.getElementById("multiLang");
+        document.getElementById("language").value =
+          e.options[e.selectedIndex].value; //no i18n
+        if (
+          document.getElementById("sessionKey").value == "" ||
+          emailID == ""
+        ) {
+          return false;
+        }
+        return true;
+      }
+
+      function handleChange(event) {
+        var isIE = false;
+
+        var ele = document.getElementById("sessionKey");
+        var key = extractNumber(ele.value);
+        var isBackSpace = false,
+          isDelete = false;
+        var caretPosition = "";
+        if (isIE) {
+          caretPosition = event.srcElement.selectionStart;
+        } else {
+          caretPosition = event.target.selectionStart;
+        }
+        if (event.inputType === "deleteContentBackward") {
+          isBackSpace = true;
+        }
+        if (event.inputType === "deleteContentForward") {
+          isDelete = true;
+        }
+        if (key !== "") {
+          document.getElementById("joinBTN").className = "join-btn";
+        } else {
+          document.getElementById("joinBTN").className = "join-btn disabled";
+        }
+        if (!(isBackSpace && key.length == 3) && key.length > 3) {
+          key = key.substring(0, 3) + "-" + key.substring(3, key.length);
+        }
+        if (!(isBackSpace && key.length == 7) && key.length > 7) {
+          key = key.substring(0, 7) + "-" + key.substring(7, key.length);
+        }
+        if (key.length > 12) {
+          key = key.substring(0, 12);
+        }
+        document.getElementById("sessionKey").value = key;
+        if (isBackSpace || isDelete) {
+          ele.setSelectionRange(caretPosition, caretPosition);
+        }
+      }
+      function isNumber(evt) {
+        var charCode = evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57) && !evt.metaKey) {
+          return false;
+        }
+        return true;
+      }
+      function extractNumber(text) {
+        var txt1 = "";
+        for (var i = 0; i < text.length; i++) {
+          if (text.charAt(i) >= "0" && text.charAt(i) <= "9")
+            txt1 += text.charAt(i);
+        }
+        return txt1;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="outer-container">
+      <div class="join-header"></div>
+      <div class="join-container">
+        <form
+          action="/login"
+          method="get"
+        >
+          <div class="join-header-txt">Join Remote Support Session</div>
+
+          <div class="join-field">
+            <input
+              type="text"
+              name="SessionID"
+              class="join-txt-box"
+              placeholder="Enter Session ID"
+              id="sessionKey"
+              onkeypress="return isNumber(event)"
+              onkeyup="handleChange(event)"
+              autofocus="autofocus"
+              autocomplete="off"
+              value=""
+            /><span class="labelspan">Session ID</span>
+            <span id="key_error" class="error-txt">Enter Session ID</span>
+          </div>
+          <div class="join-field">
+            <input
+              type="text"
+              name="NameClient"
+              class="join-txt-box name-email"
+              placeholder="Enter your name"
+              id="emailID"
+              autocomplete="off"
+              value=""
+              onkeypress="hideNameErr()"
+            /><span class="labelspan">Name</span>
+            <span id="email_error" class="error-txt">Enter your name</span>
+          </div>
+          <input
+            type="hidden"
+            name="join_source"
+            id="join_source"
+            value="JOIN_PAGE"
+          /><input type="hidden" name="src" id="src" value="" /><input
+            type="hidden"
+            name="language"
+            id="language"
+            value="en"
+          /><input
+            type="submit"
+            class="join-btn disabled"
+            value="JOIN SESSION"
+            id="joinBTN"
+          />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
