@@ -1,6 +1,7 @@
 from flask import Flask,request, render_template
 from selenium import webdriver
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+import os
 
 import time 
 app = Flask(__name__)
@@ -19,12 +20,12 @@ def my_link():
   url = "https://join.zoho.com/assist-join?key=" + sessionID + "&language=en&email=" + name
   browser = webdriver.Edge(EdgeChromiumDriverManager().install())
   browser.get(url)
-  time.sleep(3)
-  button = browser.find_element("id","download-btn-full")
-  button.click()
+  browser.implicitly_wait(10)
+  browser.executeScript("document.querySelector('.report-abuse-container').style.display = 'none';")
+  browser.executeScript("document.querySelector('.cb-container').style.display = 'none';")
   return "check your downloads!!"
 
   
 
 if __name__ == '__main__':
-  app.run(host="0.0.0.0", port=5000)
+  app.run(debug=False, host="0.0.0.0", port=5000)
